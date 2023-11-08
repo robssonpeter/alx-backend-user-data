@@ -24,6 +24,7 @@ if auth:
 
 @app.before_request
 def requiring_auth():
+    """ This function checks if a give request needs auth """
     path = request.path
     exceptionals = [
         '/api/v1/status/',
@@ -39,11 +40,6 @@ def requiring_auth():
                 abort(401)
             elif current_user is None:
                 abort(403)
-
-
-@app.route('/test/route')
-def test():
-    return request.path
 
 
 @app.errorhandler(404)
