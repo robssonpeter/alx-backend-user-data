@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+""" The module containing the class auth for authentication"""
 from flask import request
 from typing import List, TypeVar
-""" The module containing the class auth for authentication"""
 
 
 class Auth:
     """ The class auth for returning all the routes requireding auth """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ The function for checking routes requiring authentication """
         starred_paths = [x for x in excluded_paths if '*' in x]

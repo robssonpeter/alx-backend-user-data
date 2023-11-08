@@ -9,25 +9,25 @@ from models.user import User
 
 class BasicAuth(Auth):
     """ The class BasicAuth for authentication"""
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, auth_header: str) -> str:
         """ The function to extract auth value from header """
-        if authorization_header is None:
+        if auth_header is None:
             return None
-        if not isinstance(authorization_header, str):
+        if not isinstance(auth_header, str):
             return None
-        if authorization_header[:6] != "Basic ":
+        if auth_header[:6] != "Basic ":
             return None
-        return authorization_header[6:]
+        return auth_header[6:]
 
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
+    def decode_base64_authorization_header(self, b64_auth_header: str) -> str:
         """ The function to decode base64 text """
-        if base64_authorization_header is None:
+        if b64_auth_header is None:
             return None
-        if not isinstance(base64_authorization_header, str):
+        if not isinstance(b64_auth_header, str):
             return None
         else:
             try:
-                header = base64_authorization_header.encode()
+                header = b64_auth_header.encode()
                 decoded = base64.b64decode(header).decode('utf-8')
                 return decoded
             except UnicodeDecodeError:
@@ -35,27 +35,27 @@ class BasicAuth(Auth):
             except binascii.Error:
                 return None
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> (str, str):
+    def extract_user_credentials(self, dec_b64_auth_header: str) -> (str, str):
         """ Function to extract credentials """
-        if decoded_base64_authorization_header is None:
+        if dec_b64_auth_header is None:
             return None, None
-        if not isinstance(decoded_base64_authorization_header, str):
+        if not isinstance(dec_b64_auth_header, str):
             return None, None
-        if ':' not in decoded_base64_authorization_header:
+        if ':' not in dec_b64_auth_header:
             return None, None
-        lst = decoded_base64_authorization_header.split(':')
+        lst = dec_b64_auth_header.split(':')
         if (len(lst) > 2):
             pass_arr = lst[1:]
             return (lst[0], ':'.join(pass_arr))
-        return tuple(decoded_base64_authorization_header.split(':'))
+        return tuple(dec_b64_auth_header.split(':'))
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+    def user_object_from_credentials(self, e: str, p: str) -> TypeVar('User'):
         """ The function for creating the user object """
-        if user_email is None or not isinstance(user_email, str):
+        if e is None or not isinstance(e, str):
             return None
-        if user_pwd is None or not isinstance(user_pwd, str):
+        if p is None or not isinstance(p, str):
             return None
-        searched = User.search({'email': user_email})
+        searched = User.search({'email': e})
         if len(searched):
             return searched[0]
         return None
