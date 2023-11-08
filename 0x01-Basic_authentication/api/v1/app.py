@@ -58,7 +58,7 @@ def unauthorized(error) -> str:
 @app.errorhandler(403)
 def forbidden(error):
     """ The handle for restricted content """
-    return jsonify({"status": "Forbidden"}), 403
+    return jsonify({"error": "Forbidden"}), 403
 
 
 if __name__ == "__main__":
