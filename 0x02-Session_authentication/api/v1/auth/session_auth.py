@@ -25,7 +25,6 @@ class SessionAuth(Auth):
         """ Get the user id of a specific session """
         if session_id is None or not isinstance(session_id, str):
             return None
-        print(self.user_id_by_session_id)
         return self.user_id_by_session_id.get(session_id)
 
     def current_user(self, request=None):
@@ -39,3 +38,10 @@ class SessionAuth(Auth):
         if len(result):
             return result[0]
         return None
+
+    def destroy_session(self, request=None):
+        """ The method for logging out of the application """
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+        if request is None:
+            return False
