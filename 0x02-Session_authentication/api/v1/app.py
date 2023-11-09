@@ -32,13 +32,17 @@ def requiring_auth():
     exceptionals = [
         '/api/v1/status/',
         '/api/v1/unauthorized/',
-        '/api/v1/forbidden/'
+        '/api/v1/forbidden/',
+        '/api/v1/auth_session/login/',
     ]
     if auth:
         require_auth = auth.require_auth(path, exceptionals)
         header = auth.authorization_header(request)
         current_user = auth.current_user(request)
+        cookie = auth.session_cookie(request)
         request.current_user = current_user
+        if cookie is None and header is None:
+            abort(401)
         if require_auth:
             if header is None:
                 abort(401)
