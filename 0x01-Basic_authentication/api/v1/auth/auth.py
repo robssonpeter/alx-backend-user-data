@@ -9,7 +9,6 @@ class Auth:
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ The function for checking routes requiring authentication """
-        starred_paths = [x for x in excluded_paths if '*' in x]
         if path is None:
             return True
         elif excluded_paths is None or excluded_paths == []:
@@ -18,6 +17,7 @@ class Auth:
             path = path+'/'
             return path not in excluded_paths
         else:
+            starred_paths = [x for x in excluded_paths if '*' in x]
             for starred in starred_paths:
                 if path in starred:
                     return False
