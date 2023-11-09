@@ -60,7 +60,6 @@ class BasicAuth(Auth):
             for usr in searched:
                 if(usr.is_valid_password(p)):
                     return usr
-                    #return usr
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
