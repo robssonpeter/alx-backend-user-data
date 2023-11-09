@@ -42,9 +42,9 @@ def requiring_auth():
         cookie = auth.session_cookie(request)
         request.current_user = current_user
 
-        if isinstance(auth, SessionAuth):
+        """if isinstance(auth, SessionAuth):
             if cookie is None and header is None:
-                abort(401)
+                abort(401)"""
         if require_auth:
             if header is None:
                 abort(401)
