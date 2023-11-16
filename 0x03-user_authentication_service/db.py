@@ -69,6 +69,7 @@ class DB:
 
     def update_user(self, user_id, **data):
         """ The function for updating a specific user """
+        self._session.begin()
         user = self.find_user_by(id=user_id)
         """ Validate to see if key exists """
         if user:
