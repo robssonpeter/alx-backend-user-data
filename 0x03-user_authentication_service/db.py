@@ -51,7 +51,7 @@ class DB:
         session.commit()
         return user
 
-    def find_user_by(self, **obj):
+    def find_user_by(self, **obj) -> TypeVar('User'):
         """ This function searches for a user """
         searchable = ['id', 'email']
         if not obj:
@@ -67,7 +67,7 @@ class DB:
             raise NoResultFound
         return res
 
-    def update_user(self, user_id, **data):
+    def update_user(self, user_id, **data) -> None:
         """ The function for updating a specific user """
         self._session.begin()
         user = self.find_user_by(id=user_id)
