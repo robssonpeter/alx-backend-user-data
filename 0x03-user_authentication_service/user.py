@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """ The module containing the user model"""
-from sqlalchemy import Column, Integer, String, create_engine, INTEGER
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine('mysql://parker:07570237@localhost/sqlalchemy')
 
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'users'
