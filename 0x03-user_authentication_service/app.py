@@ -103,7 +103,7 @@ def get_reset_password_token():
         abort(403)
 
 
-@app.route('reset_password', methods=['PUT'])
+@app.route('/reset_password', methods=['PUT'])
 def update_password():
     """ The function to update the password """
     email = request.form.get('email')
