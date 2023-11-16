@@ -53,7 +53,7 @@ class DB:
 
     def find_user_by(self, **obj) -> TypeVar('User'):
         """ This function searches for a user """
-        searchable = ['id', 'email', 'session_id']
+        searchable = ['id', 'email', 'session_id', 'reset_token']
         if not obj:
             raise InvalidRequestError
         else:
