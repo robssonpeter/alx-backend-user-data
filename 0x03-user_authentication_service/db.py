@@ -46,6 +46,7 @@ class DB:
             session = create_session(bind=self._engine)
         else:
             session = self.__session
+        session.begin()
         session.add(user)
         session.commit()
         return user
