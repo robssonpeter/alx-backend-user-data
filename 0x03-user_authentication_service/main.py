@@ -8,7 +8,6 @@ email = 'bob@bob.com'
 password = 'MyPwdOfBob'
 auth = Auth()
 
-auth.register_user(email, password)
+#auth.register_user(email, password)
 
-print(auth.create_session(email))
-print(auth.create_session("unknown@email.com"))
+print(auth.get_user_from_session_id(session_id='0486b15b-aefa-44e3-a6a3-478e085b4843'))
