@@ -66,7 +66,7 @@ class Auth:
             uid = uuid.uuid4()
             setattr(user, 'session_id', str(uid))
             self._db.update_user(user.id, session_id=str(uid))
-            return uid
+            return str(uid)
         except NoResultFound:
             return None
 

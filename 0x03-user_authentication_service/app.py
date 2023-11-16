@@ -50,8 +50,10 @@ def login():
         logged = AUTH.create_session(email)
         if logged:
             response = {"email": email, "message": "logged in"}
+            if not isinstance(logged, str):
+                logged = str(logged)
             resp = make_response(jsonify(response))
-            resp.set_cookie('session_id', str(logged).encode())
+            resp.set_cookie('session_id', logged)
             return resp
         else:
             return jsonify({})
