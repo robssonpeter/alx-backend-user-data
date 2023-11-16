@@ -70,7 +70,6 @@ def logout():
             AUTH.destroy_session(user.id)
             resp.set_cookie('session_id', '', max_age=0)
         else:
-            print('you are ')
             return resp, 403
     return redirect('/')
 
