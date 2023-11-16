@@ -7,7 +7,7 @@ from flask import abort
 from flask import make_response
 from flask import redirect
 from auth import Auth
-from sqlalchemy.exc import NoResultFound
+from sqlalchemy.orm.exc import NoResultFound
 
 
 AUTH = Auth()
