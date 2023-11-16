@@ -27,10 +27,11 @@ class Auth:
 
     @property
     def db(self):
+        """ The property db function """
         return self._db
 
     @db.getter
-    def db(self):
+    def db(self) -> DB:
         """ Get the db information """
         return self._db        
 
@@ -83,7 +84,7 @@ class Auth:
     def destroy_session(self, user_id) -> None:
         """ Destroy session of a user """
         try:
-            user = self._db.find_user_by()
+            user = self._db.find_user_by(id=user_id)
             self._db.update_user(user.id, session_id=None)
             return None
         except NoResultFound:
