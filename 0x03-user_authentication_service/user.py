@@ -9,6 +9,7 @@ Base = declarative_base()
 
 
 class User(Base):
+    """ The model user that connects to database """
     __tablename__ = 'users'
     id = Column('id', Integer(), autoincrement=True, primary_key=True)
     email = Column('email', String(250), nullable=False)
