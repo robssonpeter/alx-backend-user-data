@@ -94,7 +94,7 @@ def get_reset_password_token():
         token = AUTH.get_reset_password_token(email)
         if token:
             response = {
-                "email": email, 
+                "email": email,
                 "reset_token": token
             }
             return jsonify(response), 200
@@ -102,6 +102,25 @@ def get_reset_password_token():
     except ValueError:
         abort(403)
 
+
+@app.route('reset_password', methods=['PUT'])
+def update_password():
+    """ The function to update the password """
+    email = request.form.get('email')
+    token = request.form.get('reset_token')
+    password = request.form.get('new_password')
+    try:
+        user = AUTH.db.find_user_by(email=email)
+        if user and user.reset_token == token:
+            """ Update the password """
+            AUTH.update_password(token, password)
+        resp = {
+            "email": email,
+            "message": "Password updated"
+        }
+        return jsonify(resp), 200
+    except NoResultFound:
+        return make_response("User could not be found"), 403
 
 
 if __name__ == "__main__":
