@@ -96,10 +96,7 @@ class Auth:
             user = self._db.find_user_by(email=email)
             if user:
                 token = str(uuid.uuid4())
-                update_data = {
-                    'reset_token': token
-                }
-                self._db.update_user(user.id, update_data)
+                self._db.update_user(user.id, reset_token=token)
                 return token
         except NoResultFound:
             raise ValueError('User does not exist')
