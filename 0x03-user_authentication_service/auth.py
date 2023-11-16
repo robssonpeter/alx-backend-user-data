@@ -33,7 +33,7 @@ class Auth:
     @db.getter
     def db(self) -> DB:
         """ Get the db information """
-        return self._db        
+        return self._db
 
     def register_user(self, email: str, password: str) -> TypeVar('User'):
         """ The function for registering a user """
@@ -67,7 +67,7 @@ class Auth:
             setattr(user, 'session_id', uid)
             self._db.update_user(user.id, session_id=str(uid))
             return uid
-        except:
+        except NoResultFound:
             return None
 
     def get_user_from_session_id(self, session_id) -> TypeVar('user'):
